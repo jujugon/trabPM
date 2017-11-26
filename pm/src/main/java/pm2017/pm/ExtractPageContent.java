@@ -3,17 +3,15 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.canvas.parser.PdfDocumentContentParser;
-import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
 import com.itextpdf.kernel.pdf.canvas.parser.listener.LocationTextExtractionStrategy;
 
 public class ExtractPageContent {
 
 	public static void main(String[] args) {
         try {
-            HashMap<String, String> testOutput;
+            HashMap<String, Integer> testOutput;
             PdfReader reader = new PdfReader("C:/Users/lucas/Desktop/historicoEscolarCRAprovados.pdf");
 			System.out.println(reader.toString());
 			PdfDocument doc = new PdfDocument(reader);

@@ -29,10 +29,11 @@ public class CoursesHandler {
 		return coursesList;
 	}
 	
-	public static HashMap<String, String> assembleCourseSituations(String input) throws IOException{
-		HashMap<String, String> mapaCodSit = new HashMap<String, String>();
+	public static HashMap<String, Integer> assembleCourseSituations(String input) throws IOException{
+		HashMap<String, Integer> mapaCodSit = new HashMap<String, Integer>();
 		BufferedReader bufReader = new BufferedReader(new StringReader(input));
-		String line, situation;
+		String line;
+		Integer situation;
 		Boolean readingCourses = false;
 		
 		while ((line = bufReader.readLine()) != null){
@@ -47,7 +48,7 @@ public class CoursesHandler {
 				readingCourses = false;
 			}
 		}
-		
+		System.out.println(mapaCodSit.entrySet());
 		return mapaCodSit;
 		
 	}

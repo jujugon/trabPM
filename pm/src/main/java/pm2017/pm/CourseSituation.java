@@ -8,22 +8,20 @@ public enum CourseSituation {
 	TRA,
 	DIS;
 	
-	public static String getCourseSituation(String input){
-		if (input.contains(CourseSituation.APV.toString())){
-			return CourseSituation.APV.toString();
-		} else if (input.contains(CourseSituation.REP.toString())){
-			return CourseSituation.REP.toString();
-		} else if (input.contains(CourseSituation.REF.toString())){
-			return CourseSituation.REF.toString();
-		} else if (input.contains(CourseSituation.ASC.toString())){
-			return CourseSituation.ASC.toString();
-		} else if (input.contains(CourseSituation.TRA.toString())){
-			return CourseSituation.TRA.toString();
-		} else if (input.contains(CourseSituation.DIS.toString())){
-			return CourseSituation.DIS.toString();
-		} else {
-			return null;
+	
+	public static Integer getCourseSituation(String input){
+		for (CourseSituation sit : CourseSituation.values()){
+			if(input.contains(sit.toString())){
+				if (sit.equals(APV) || sit.equals(DIS)){
+					return 1;
+				} else if (sit.equals(TRA) || sit.equals(ASC)){
+					return 0;
+				} else {
+					return 10;
+				}
+			}
 		}
 		
+		return null;
 	}
 }
