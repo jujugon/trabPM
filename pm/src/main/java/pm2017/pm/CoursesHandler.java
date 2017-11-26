@@ -3,7 +3,9 @@ package pm2017.pm;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CoursesHandler {
 	
@@ -25,6 +27,29 @@ public class CoursesHandler {
 		reader.close();
 		
 		return coursesList;
+	}
+	
+	public static HashMap<String, String> assembleCourseSituations(String input) throws IOException{
+		HashMap<String, String> mapaCodSit = new HashMap<String, String>();
+		BufferedReader bufReader = new BufferedReader(new StringReader(input));
+		String line, situation;
+		Boolean readingCourses = false;
+		
+		while ((line = bufReader.readLine()) != null){
+			if (readingCourses = true){
+				if ((situation = CourseSituation.getCourseSituation(line)) != null){
+					mapaCodSit.put(line.substring(0, 7), situation);
+				}
+			}
+			if (line.contains("Código")){
+				readingCourses = true;
+			} else if (line.contains("Coeficiente")){
+				readingCourses = false;
+			}
+		}
+		
+		return mapaCodSit;
+		
 	}
 	
 }
