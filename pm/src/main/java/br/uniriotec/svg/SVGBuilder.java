@@ -30,9 +30,6 @@ public class SVGBuilder {
 		
 		while ((line = reader.readLine()) != null){
 			if (line.contains("COD=")){
-				if (y != "0"){             //Checagem para que o hashmap só seja preenchido após o primeiro ciclo da matéria e as posições de X e Y
-					courseBlockPosMap.put(courseCode, courseBlock);
-				}
 				courseCode = line.substring(4);
 				courseBlock = new SVGBlockPosition();
 			} else if (line.contains("X=")){
@@ -41,6 +38,7 @@ public class SVGBuilder {
 			} else {
 				y = line.substring(2);
 				courseBlock.setY(y);
+				courseBlockPosMap.put(courseCode, courseBlock);
 			}
 		}
 		
@@ -71,7 +69,7 @@ public class SVGBuilder {
 					root.appendChild(createGreenBlockRectangle(document, x, y));
 				} 	
 			} else if (entry.getValue() % 2 == 1) {
-				if ((entry.getKey().contains("TIN")) && optNumber < 9) {
+				if ((entry.getKey().contains("TIN")) && optNumber < 9 && !isComplementary(entry.getKey())) {
 					x = courseBlockPosMap.get("OPTATIVA0" + optNumber).getX();
 					y = courseBlockPosMap.get("OPTATIVA0" + optNumber).getY();
 					root.appendChild(createGreenBlockRectangle(document, x, y));
@@ -86,7 +84,7 @@ public class SVGBuilder {
 		}	
 	}
 
-	public Element createRedBlockRectangle(Document document, String x, String y){
+	private Element createRedBlockRectangle(Document document, String x, String y){
 		String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
         Element e;
 		e = document.createElementNS(svgNS, "rect");
@@ -98,7 +96,7 @@ public class SVGBuilder {
         return e;
 	}
 	
-	public Element createGreenBlockRectangle(Document document, String x, String y){
+	private Element createGreenBlockRectangle(Document document, String x, String y){
 		String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
         Element e;
 		e = document.createElementNS(svgNS, "rect");
@@ -108,6 +106,16 @@ public class SVGBuilder {
         e.setAttributeNS(null, "height", blockHeight);
         e.setAttributeNS(null, "style", approvedBlockStyle);     
         return e;
+	}
+	
+	public Boolean isComplementary(String entry){
+		if(entry.contains("TIN0151") ||
+				entry.contains("TIN0152") ||
+				entry.contains("TIN0153") ||
+				entry.contains("TIN0154")){
+			return true;
+		}
+		return false;
 	}
 	
 	
