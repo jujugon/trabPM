@@ -10,8 +10,6 @@ import org.apache.batik.anim.dom.SVGDOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import br.uniriotec.history.EducationalHistory;
-
 public class SVGBuilder {
 	
 	private HashMap<String, SVGBlockPosition> courseBlockPosMap;
@@ -20,7 +18,10 @@ public class SVGBuilder {
 	private final String approvedBlockStyle = "fill:#00FF00;fill-opacity:.5";
 	private final String failedBlockStyle = "fill:#FF0000;fill-opacity:.5";
 	
-	
+	/**
+	 * Carrega para a classe as posições dos blocos respectivos as matérias através de um recurso TXT já definido
+	 * @throws IOException Em caso de erro na leitura das linhas
+	 */
 	public void loadBlockPositions() throws IOException{
 		HashMap<String, SVGBlockPosition> courseBlockPosMap = new HashMap<String, SVGBlockPosition>();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(SVGBuilder.class.getResourceAsStream("PosPerCourseBlock.txt")));
@@ -48,6 +49,11 @@ public class SVGBuilder {
 		
 	}
 	
+	/**
+	 * Método para montagem do SVG com base nas matérias aprovadas e não aprovadas, e sobre um documento SVG de fluxograma predefinido
+	 * @param courseSituationMap Mapa de relação de aprovação e reprovação das matérias
+	 * @param document Documento SVG predefinido
+	 */
 	public void build(HashMap<String, Integer> courseSituationMap, Document document){
         String x = "0", y = "0";
 		int optNumber = 1; //Contador de optativas
@@ -84,6 +90,13 @@ public class SVGBuilder {
 		}	
 	}
 
+	/**
+	 * Cria um elemento de retângulo vermelho parcialmente transparente, na posição especificada pelos argumentos
+	 * @param document Documento sobre o qual será montado o elemento
+	 * @param x Eixo X para posicionamento do retângulo
+	 * @param y Eixo Y para posicionamento do retângulo
+	 * @return Elemento pronto para ser adicionado ao documento raiz
+	 */
 	private Element createRedBlockRectangle(Document document, String x, String y){
 		String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
         Element e;
@@ -96,6 +109,13 @@ public class SVGBuilder {
         return e;
 	}
 	
+	/**
+	 * Cria um elemento de retângulo verde parcialmente transparente, na posição especificada pelos argumentos
+	 * @param document Documento sobre o qual será montado o elemento
+	 * @param x Eixo X para posicionamento do retângulo
+	 * @param y Eixo Y para posicionamento do retângulo
+	 * @return Elemento pronto para ser adicionado ao documento raiz
+	 */
 	private Element createGreenBlockRectangle(Document document, String x, String y){
 		String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
         Element e;
@@ -108,6 +128,13 @@ public class SVGBuilder {
         return e;
 	}
 	
+	
+	/**
+	 * Método necessário para filtrar os códigos de matérias consideradas formação complementar,
+	 *  que possuem prefixo como de Optativas ou Eletivas
+	 * @param entry Texto a ser verificado
+	 * @return Retorna True se o código da matéria for de formação complementar, e False caso contrário
+	 */
 	public Boolean isComplementary(String entry){
 		if(entry.contains("TIN0151") ||
 				entry.contains("TIN0152") ||

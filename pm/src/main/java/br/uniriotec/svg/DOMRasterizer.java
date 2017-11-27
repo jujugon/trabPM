@@ -10,6 +10,10 @@ import org.w3c.dom.Document;
 
 public class DOMRasterizer {
 
+	/**
+	 * Código para capturar um documento SVG de um arquivo existente através de uma URI
+	 * {@link https://stackoverflow.com/questions/26027313/how-to-load-and-parse-svg-documents}
+	 */
     public Document createDocument(String uri) throws IOException {
         String parser = XMLResourceDescriptor.getXMLParserClassName();
         SAXSVGDocumentFactory factory = new SAXSVGDocumentFactory( parser );
@@ -18,6 +22,9 @@ public class DOMRasterizer {
         return document;
     }
 
+    /**
+     * {@link https://xmlgraphics.apache.org/batik/using/transcoder.html}
+     */
     public void save(Document document) throws Exception {
         JPEGTranscoder t = new JPEGTranscoder();
         t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY,
@@ -28,12 +35,5 @@ public class DOMRasterizer {
         t.transcode(input, output);
         ostream.flush();
         ostream.close();
-    }
-
-    public static void main(String [] args) throws Exception {
-        DOMRasterizer rasterizer = new DOMRasterizer();
-        Document document = rasterizer.createDocument("file:///C:/Users/lucas/Desktop/grade_curricular.svg");
-        rasterizer.save(document);
-        System.exit(0);
     }
 }

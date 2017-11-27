@@ -1,11 +1,7 @@
 package br.uniriotec.bsi;
 
-import java.io.IOException;
-import java.util.HashMap;
 
 import org.w3c.dom.Document;
-
-import com.itextpdf.signatures.ExternalBlankSignatureContainer;
 
 import br.uniriotec.history.*;
 import br.uniriotec.pdf.PDFExtractor;
