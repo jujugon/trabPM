@@ -1,2 +1,2 @@
 # trabfinalPM
-Lucas Ribeiro e Lucas Carvalho
+Lucas Ribeiro, Lucas Carvalho, Daniel Correa e Jessica Leite
