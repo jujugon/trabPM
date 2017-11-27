@@ -1,6 +1,7 @@
 package br.uniriotec.svg;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -24,7 +25,8 @@ public class SVGBuilder {
 	 */
 	public void loadBlockPositions() throws IOException{
 		HashMap<String, SVGBlockPosition> courseBlockPosMap = new HashMap<String, SVGBlockPosition>();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(SVGBuilder.class.getResourceAsStream("PosPerCourseBlock.txt")));
+		BufferedReader reader = new BufferedReader(new FileReader ("C:/Users/Daniel/Downloads/PM/pm/src/main/resources/br/uniriotec/svg/PosPerCourseBlock.txt"));
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(SVGBuilder.class.getResourceAsStream("PosPerCourseBlock.txt")));
 		String line = "", courseCode = "";
 		SVGBlockPosition courseBlock = new SVGBlockPosition();
 		String x = "0", y = "0";

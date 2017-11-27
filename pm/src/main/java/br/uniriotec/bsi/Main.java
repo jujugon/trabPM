@@ -12,7 +12,7 @@ public class Main {
 
 	
 	public static void main(String[] args) throws Exception {
-        	String path = "C:/Users/lucas/Desktop/historicoEscolarCRAprovados.pdf";
+        	String path = "C:/Users/Daniel/Desktop/historicoEscolarCRAprovados.pdf";
         	
         	BSIHistory bsiHistory = new BSIHistory(PDFExtractor.extractPageContent(path));
         	
@@ -31,7 +31,7 @@ public class Main {
     		
     		//Rasterizer responsável por criar a base do documento SVG e também por converter e salvar a saída em PNG
             DOMRasterizer rasterizer = new DOMRasterizer();
-            Document document = rasterizer.createDocument("file:///C:/Users/lucas/Desktop/grade_curricular.svg");
+            Document document = rasterizer.createDocument("file:///C:/Users/Daniel/Desktop/grade_curricular.svg");
             
             //SVG Builder para carregar as matérias e o cruzamento das situações para preenchimento no SVG
             SVGBuilder builder = new SVGBuilder();
